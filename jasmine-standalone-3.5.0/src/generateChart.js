@@ -136,6 +136,12 @@ class GenerateChart {
         ],
       },
       options: {
+        title: {
+          display: true,
+          text: "Algorthim Complexity",
+          fontSize: 20,
+          fontStyle: 'bold'
+        },
         scales: {
           xAxes: [
             {
@@ -157,6 +163,13 @@ class GenerateChart {
               },
             },
           ],
+        },
+        legend: {
+          labels: {
+            fontSize: 16,
+            fontStyle: "bold",
+            usePointStyle: true,
+          },
         },
       },
     });
