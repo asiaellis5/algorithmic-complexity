@@ -4,6 +4,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <script src="src/timer.js"></script>
+  <script src="src/generateChart.js"></script>
 
 </header>
 
@@ -12,142 +13,11 @@
     <canvas id="myChart" width="200px" height="100px"></canvas>
   </div>
 </body>
+
 <script>
-  var ctx = document.getElementById('myChart').getContext('2d');
-  let reverseTimer = new Timer(reverse)
-  reverseTimer.time(1000, 100000)
-
-  let inputs = []
-  let reverseTimes = []
-
-  reverseTimer.times.forEach((iteration) => {
-    inputs.push(iteration.size)
-  })
-  reverseTimer.times.forEach((iteration) => {
-    reverseTimes.push(iteration.time)
-  })
-
-  let sortTimer = new Timer(sort)
-  sortTimer.time(100, 10000)
-
-  let sortTimes = []
-
-  sortTimer.times.forEach((iteration) => {
-    sortTimes.push(iteration.time)
-  })
-
-  let lastTimer = new Timer(last)
-  lastTimer.time(100, 10000)
-
-  let lastTimes = []
-
-  lastTimer.times.forEach((iteration) => {
-    lastTimes.push(iteration.time)
-  })
-
-  let shuffleTimer = new Timer(shuffle)
-  shuffleTimer.time(100, 10000)
-
-  let shuffleTimes = []
-
-  shuffleTimer.times.forEach((iteration) => {
-    shuffleTimes.push(iteration.time)
-  })
-  var myChart = new Chart(ctx, {
-    type: "line",
-    data: {
-      labels: inputs,
-      datasets: [{
-        label: 'Reverse',
-        data: reverseTimes,
-        fill: false,
-        hidden: false,
-        backgroundColor: "rgba(251,189,8, 0.4)",
-        borderColor: "#fbbd08",
-        borderWidth: 3,
-        pointBackgroundColor: "#fbbd08",
-        pointBorderWidth: 0.5,
-        pointStyle: "rectRounded",
-        pointRadius: 4,
-        pointHitRadius: 5,
-        pointHoverRadius: 5,
-        hoverBackgroundColor: "#FFFFFF"
-      },
-      {
-        label: 'Sort',
-        data: sortTimes,
-        fill: false,
-        hidden: true,
-        // backgroundColor: "rgba(40, 167, 69, 0.4)",
-        borderColor: "#28a745",
-        borderWidth: 3,
-        pointBorderWidth: 0,
-        pointStyle: "rectRounded",
-        pointRadius: 4,
-        pointHitRadius: 5,
-        pointHoverRadius: 5,
-        pointBackgroundColor: "#28a745",
-        hoverBackgroundColor: "#28a745",
-      },
-      {
-        label: 'Last',
-        data: lastTimes,
-        fill: false,
-        hidden: true,
-        backgroundColor: "rgba(255,99,132,0.2)",
-        borderColor: "#dc3644",
-        borderWidth: 3,
-        pointBackgroundColor: "#dc3644",
-        pointBorderWidth: 0.5,
-        pointStyle: "rectRounded",
-        pointRadius: 4,
-        pointHitRadius: 5,
-        pointHoverRadius: 5,
-        hoverBackgroundColor: "#dc3644"
-      },
-      {
-        label: 'Shuffle',
-        data: shuffleTimes,
-        fill: false,
-        hidden: true,
-        backgroundColor: "rgba(24,162,184, 0.2)",
-        borderColor: "#18a2b8",
-        borderWidth: 3,
-        pointBackgroundColor: "#18a2b8",
-        pointBorderWidth: 0.5,
-        pointStyle: "rectRounded",
-        pointRadius: 4,
-        pointHitRadius: 5,
-        pointHoverRadius: 5,
-        hoverBackgroundColor: "#18a2b8"
-      },
-      ],
-    },
-    options: {
-      scales: {
-        xAxes: [
-          {
-            scaleLabel: {
-              display: true,
-              labelString: "Elements in Array",
-            },
-            gridLines: {
-              display: false,
-              drawBorder: true,
-            },
-          },
-        ],
-        yAxes: [
-          {
-            scaleLabel: {
-              display: true,
-              labelString: "Milliseconds",
-            },
-          },
-        ],
-      },
-    },
-  });
+  let graph = new GenerateChart();
+  graph.generateChartData();
 </script>
+
 
 </html>
