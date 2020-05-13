@@ -22,7 +22,7 @@ class GenerateChart {
     this.generateReverseData(1000, 100000)
     this.generateLastData(1000, 100000)
     this.generateShuffleData(1000, 100000)
-    this.renderChart(this.labels, this.data)
+    this.renderChart(this.labels, this.generateDataSets(this.data))
   }
 
   generateSortData = (step, finalSize) => {
@@ -61,6 +61,31 @@ class GenerateChart {
     this.data.push(shuffleData)
   }
 
+  generateDataSets = (data) => {
+    let names = ["Sort", "Reverse", "Last", "Shuffle"]
+    let colors = ["#28a745", "#fbbd08", "#dc3644", "#18a2b8"]
+    let dataArray = []
+    names.forEach((label, i) => {
+      dataArray.push({
+        label: label,
+        data: data[i],
+        fill: false,
+        hidden: false,
+        borderColor: colors[i],
+        borderWidth: 3,
+        pointBorderWidth: 0,
+        pointStyle: "rectRounded",
+        pointRadius: 4,
+        pointHitRadius: 5,
+        pointHoverRadius: 5,
+        pointBackgroundColor: colors[i],
+        hoverBackgroundColor: colors[i],
+      })
+    })
+    return dataArray
+
+  }
+
 
 
   renderChart = (labels, data) => {
@@ -69,71 +94,7 @@ class GenerateChart {
       type: "line",
       data: {
         labels: labels,
-        datasets: [
-          {
-            label: 'Sort',
-            data: data[0],
-            fill: false,
-            hidden: false,
-            borderColor: "#28a745",
-            borderWidth: 3,
-            pointBorderWidth: 0,
-            pointStyle: "rectRounded",
-            pointRadius: 4,
-            pointHitRadius: 5,
-            pointHoverRadius: 5,
-            pointBackgroundColor: "#28a745",
-            hoverBackgroundColor: "#28a745",
-          },
-          {
-            label: 'Reverse',
-            data: data[1],
-            fill: false,
-            hidden: true,
-            backgroundColor: "rgba(251,189,8, 0.4)",
-            borderColor: "#fbbd08",
-            borderWidth: 3,
-            pointBackgroundColor: "#fbbd08",
-            pointBorderWidth: 0.5,
-            pointStyle: "rectRounded",
-            pointRadius: 4,
-            pointHitRadius: 5,
-            pointHoverRadius: 5,
-            hoverBackgroundColor: "#FFFFFF"
-          },
-          {
-            label: 'Last',
-            data: data[2],
-            fill: false,
-            hidden: true,
-            backgroundColor: "rgba(255,99,132,0.2)",
-            borderColor: "#dc3644",
-            borderWidth: 3,
-            pointBackgroundColor: "#dc3644",
-            pointBorderWidth: 0.5,
-            pointStyle: "rectRounded",
-            pointRadius: 4,
-            pointHitRadius: 5,
-            pointHoverRadius: 5,
-            hoverBackgroundColor: "#dc3644"
-          },
-          {
-            label: 'Shuffle',
-            data: data[3],
-            fill: false,
-            hidden: true,
-            backgroundColor: "rgba(24,162,184, 0.2)",
-            borderColor: "#18a2b8",
-            borderWidth: 3,
-            pointBackgroundColor: "#18a2b8",
-            pointBorderWidth: 0.5,
-            pointStyle: "rectRounded",
-            pointRadius: 4,
-            pointHitRadius: 5,
-            pointHoverRadius: 5,
-            hoverBackgroundColor: "#18a2b8"
-          },
-        ],
+        datasets: data
       },
       options: {
         title: {
