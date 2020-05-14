@@ -6,13 +6,17 @@
   <script src="src/timer.js"></script>
   <script src="src/generateChart.js"></script>
   <script src="src/generateShuffleChart.js"></script>
+  <script src="src/generateReverseChart.js"></script>
+  <script src="src/generateFindDupChart.js"></script>
 
 </header>
 
 <body>
   <div>
-    <canvas id="myChart" width="200px" height="100px"></canvas>
-    <canvas id="myShuffleChart" width="200px" height="100px"></canvas>
+    <canvas id="myChart" width="100px" height="50px"></canvas>
+    <canvas id="myShuffleChart" width="100px" height="50px"></canvas>
+    <canvas id="myReverseChart" width="100px" height="50px"></canvas>
+    <canvas id="myDuplicateChart" width="100px" height="50px"></canvas>
   </div>
 </body>
 
@@ -21,6 +25,11 @@
   graph.generateChartData();
   let shuffleGraph = new GenerateShuffleChart();
   shuffleGraph.generateShuffleChartData();
+  let reverseGraph = new GenerateReverseChart();
+  reverseGraph.generateReverseChartData();
+  let duplicateGraph = new GenerateFindDupChart();
+  duplicateGraph.generateDuplicateChartData();
+
 </script>
 
 
