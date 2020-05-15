@@ -124,3 +124,40 @@ class GenerateFindDupChart {
     });
   };
 }
+
+myFindDuplicate = (input) => {
+  let counter = {}
+  let duplicates = []
+
+  input.forEach((element) => {
+    if (counter[element] === undefined) {
+      counter[element] = 1
+    } else {
+      counter[element] += 1
+      if (counter[element] === 2) {
+        duplicates.push(element)
+      }
+    }
+  })
+  return duplicates
+}
+
+otherFindDuplicate = (input) => {
+  let uniq = [...new Set(input)]
+  return uniq
+}
+
+newOtherFindDuplicate = (arr) => {
+  var hashTable = [];
+  var dups = [];
+
+  for (var i = 0; i < arr.length; i++) {
+    if (hashTable[arr[i].toString()] === undefined) {
+      hashTable[arr[i].toString()] = true;
+    }
+    else { dups.push(arr[i]); }
+
+  }
+
+  return dups;
+}

@@ -113,3 +113,14 @@ class GenerateShuffleChart {
     });
   };
 }
+
+shuffle = (input) => {
+  for (let i = input.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [input[i], input[j]] = [input[j], input[i]];
+  }
+}
+
+otherShuffle = (input) => {
+  input.sort(() => Math.random() - 0.5);
+}
