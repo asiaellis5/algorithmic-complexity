@@ -33,7 +33,7 @@ class Timer {
 
   makeArray = (input, i) => {
     let array = [...Array(i).keys()]
-    if (this.function === findDuplicate) {
+    if (this.function === myFindDuplicate || this.function === otherFindDuplicate) {
       for (let i = 0; i < array.length; i++) {
         input.push(array[i])
       }
@@ -74,9 +74,9 @@ otherShuffle = (input) => {
   input.sort(() => Math.random() - 0.5);
 }
 
-findDuplicate = (input) => {
+myFindDuplicate = (input) => {
   let counter = {}
-  let dup = []
+  let duplicates = []
 
   input.forEach((element) => {
     if (counter[element] === undefined) {
@@ -84,11 +84,31 @@ findDuplicate = (input) => {
     } else {
       counter[element] += 1
       if (counter[element] === 2) {
-        dup.push(element)
+        duplicates.push(element)
       }
     }
   })
-  return dup
+  return duplicates
+}
+
+otherFindDuplicate = (input) => {
+  let uniq = [...new Set(input)]
+  return uniq
+}
+
+newOtherFindDuplicate = (arr) => {
+  var hashTable = [];
+  var dups = [];
+
+  for (var i = 0; i < arr.length; i++) {
+    if (hashTable[arr[i].toString()] === undefined) {
+      hashTable[arr[i].toString()] = true;
+    }
+    else { dups.push(arr[i]); }
+
+  }
+
+  return dups;
 }
 
 

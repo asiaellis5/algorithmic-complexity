@@ -1,7 +1,8 @@
 class GenerateFindDupChart {
   constructor() {
-    this.timerDuplicate = new Timer(findDuplicate)
-    // this.timerOtherDuplicate = new Timer(otherShuffle)
+    this.timerDuplicate = new Timer(myFindDuplicate)
+    this.timerOtherDuplicate = new Timer(otherFindDuplicate)
+    this.timerNewOtherDuplicate = new Timer(newOtherFindDuplicate)
     this.data = []
     this.labels = []
   }
@@ -17,7 +18,8 @@ class GenerateFindDupChart {
   generateDuplicateChartData = () => {
     this.generateLabels(1000, 100000)
     this.generateDuplicateData(1000, 1000)
-    // this.generateOtherDuplicateData(1000, 100000)
+    this.generateOtherDuplicateData(1000, 100000)
+    this.generateNewOtherDuplicateData(1000, 100000)
     this.renderChart(this.labels, this.generateDataSets(this.data))
   }
 
@@ -39,10 +41,19 @@ class GenerateFindDupChart {
     this.data.push(duplicateOtherData)
   }
 
+  generateNewOtherDuplicateData = (step, finalSize) => {
+    this.timerNewOtherDuplicate.time(step, finalSize)
+    let duplicateNewOtherData = []
+    this.timerNewOtherDuplicate.times.forEach((iteration) => {
+      duplicateNewOtherData.push(iteration.time)
+    })
+    this.data.push(duplicateNewOtherData)
+  }
+
   generateDataSets = (data) => {
     console.log(data)
-    let names = ["FindDuplicate", "OtherFindDuplicates"]
-    let colors = ["#28a745", "#fbbd08"]
+    let names = ["FindDuplicate", "OtherFindDuplicates", "new"]
+    let colors = ["#28a745", "#fbbd08", "#000000"]
     let dataArray = []
     names.forEach((label, i) => {
       dataArray.push({
