@@ -1,8 +1,8 @@
-class GenerateFindDupChart {
+class FindDuplicates {
   constructor() {
     this.timerDuplicate = new Timer(myFindDuplicate)
     this.timerOtherDuplicate = new Timer(otherFindDuplicate)
-    this.timerNewOtherDuplicate = new Timer(newOtherFindDuplicate)
+    this.timerNewOtherDuplicate = new Timer(newFindDuplicate)
     this.data = []
     this.labels = []
   }
@@ -51,8 +51,7 @@ class GenerateFindDupChart {
   }
 
   generateDataSets = (data) => {
-    console.log(data)
-    let names = ["FindDuplicate", "OtherFindDuplicates", "new"]
+    let names = ["Find Duplicates", "Other Find Duplicates", "Another Find Duplicates"]
     let colors = ["#28a745", "#fbbd08", "#000000"]
     let dataArray = []
     names.forEach((label, i) => {
@@ -147,7 +146,7 @@ otherFindDuplicate = (input) => {
   return uniq
 }
 
-newOtherFindDuplicate = (arr) => {
+newFindDuplicate = (arr) => {
   var hashTable = [];
   var dups = [];
 

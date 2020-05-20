@@ -1,47 +1,46 @@
-class Shuffle {
+class Last {
   constructor() {
-    this.timerShuffle = new Timer(shuffle)
-    this.timerOtherShuffle = new Timer(myShuffle)
+    this.timerLast = new Timer(last)
+    this.timerOtherLast = new Timer(myLast)
     this.data = []
     this.labels = []
   }
 
   generateLabels = (step, finalSize) => {
-    this.timerShuffle.time(step, finalSize)
-    this.timerShuffle.times.forEach((iteration) => {
+    this.timerLast.time(step, finalSize)
+    this.timerLast.times.forEach((iteration) => {
       this.labels.push(iteration.size)
     })
-
   }
 
-  generateShuffleChartData = () => {
+  generateLastChartData = () => {
     this.generateLabels(1000, 100000)
-    this.generateShuffleData(1000, 1000)
-    this.generateOtherShuffleData(1000, 100000)
+    this.generateLastData(1000, 100000)
+    this.generateOtherLastData(1000, 100000)
     this.renderChart(this.labels, this.generateDataSets(this.data))
   }
 
-  generateShuffleData = (step, finalSize) => {
-    this.timerShuffle.time(step, finalSize)
-    let shuffleData = []
-    this.timerShuffle.times.forEach((iteration) => {
-      shuffleData.push(iteration.time)
+  generateLastData = (step, finalSize) => {
+    this.timerLast.time(step, finalSize)
+    let lastData = []
+    this.timerLast.times.forEach((iteration) => {
+      lastData.push(iteration.time)
     })
-    this.data.push(shuffleData)
+    this.data.push(lastData)
   }
 
-  generateOtherShuffleData = (step, finalSize) => {
-    this.timerOtherShuffle.time(step, finalSize)
-    let shuffleOtherData = []
-    this.timerOtherShuffle.times.forEach((iteration) => {
-      shuffleOtherData.push(iteration.time)
+  generateOtherLastData = (step, finalSize) => {
+    this.timerOtherLast.time(step, finalSize)
+    let lastOtherData = []
+    this.timerOtherLast.times.forEach((iteration) => {
+      lastOtherData.push(iteration.time)
     })
-    this.data.push(shuffleOtherData)
+    this.data.push(lastOtherData)
   }
 
   generateDataSets = (data) => {
-    let names = ["Shuffle", "Other Shuffle"]
-    let colors = ["#28a745", "#fbbd08"]
+    let names = ["Original Last", "Other Last"]
+    let colors = ["#dc3644", "#18a2b8"]
     let dataArray = []
     names.forEach((label, i) => {
       dataArray.push({
@@ -65,7 +64,7 @@ class Shuffle {
   }
 
   renderChart = (labels, data) => {
-    var ctx = document.getElementById("myShuffleChart").getContext("2d");
+    var ctx = document.getElementById("myLastChart").getContext("2d");
     var myChart = new Chart(ctx, {
       type: "line",
       data: {
@@ -75,7 +74,7 @@ class Shuffle {
       options: {
         title: {
           display: true,
-          text: "Shuffle",
+          text: "Last",
           fontSize: 20,
           fontStyle: 'bold'
         },
@@ -113,13 +112,10 @@ class Shuffle {
   };
 }
 
-shuffle = (input) => {
-  for (let i = input.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [input[i], input[j]] = [input[j], input[i]];
-  }
+last = (input) => {
+  input.slice(-1)[0]
 }
 
-myShuffle = (input) => {
-  input.sort(() => Math.random() - 0.5);
+myLast = (input) => {
+  input[input.length - 1]
 }

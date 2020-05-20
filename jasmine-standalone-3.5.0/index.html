@@ -7,6 +7,8 @@
   <script src="src/comparison.js"></script>
   <script src="src/shuffle.js"></script>
   <script src="src/reverse.js"></script>
+  <script src="src/last.js"></script>
+  <script src="src/sort.js"></script>
   <script src="src/findDuplicates.js"></script>
 
 </header>
@@ -16,18 +18,24 @@
     <canvas id="myChart" width="100" height="50"></canvas>
     <canvas id="myShuffleChart" width="100" height="50"></canvas>
     <canvas id="myReverseChart" width="100" height="50"></canvas>
+    <canvas id="myLastChart" width="100" height="50"></canvas>
+    <canvas id="mySortChart" width="100" height="50"></canvas>
     <canvas id="myDuplicateChart" width="100" height="50"></canvas>
   </div>
 </body>
 
 <script>
-  let graph = new GenerateChart();
+  let graph = new Comparison();
   graph.generateChartData();
-  let shuffleGraph = new GenerateShuffleChart();
+  let shuffleGraph = new Shuffle();
   shuffleGraph.generateShuffleChartData();
-  let reverseGraph = new GenerateReverseChart();
+  let reverseGraph = new Reverse();
   reverseGraph.generateReverseChartData();
-  let duplicateGraph = new GenerateFindDupChart();
+  let lastGraph = new Last()
+  lastGraph.generateLastChartData()
+  let sortGraph = new Sort()
+  sortGraph.generateSortChartData()
+  let duplicateGraph = new FindDuplicates();
   duplicateGraph.generateDuplicateChartData();
 
 </script>

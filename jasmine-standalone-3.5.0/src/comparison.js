@@ -1,4 +1,4 @@
-class GenerateChart {
+class Comparison {
   constructor() {
     this.timerSort = new Timer(sort)
     this.timerReverse = new Timer(reverse)
@@ -154,6 +154,11 @@ last = (input) => {
 shuffle = (input) => {
   for (let i = input.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
+    console.log("math floor", Math.random())
     [input[i], input[j]] = [input[j], input[i]];
   }
+}
+
+push = (input) => {
+  input.push(1)
 }

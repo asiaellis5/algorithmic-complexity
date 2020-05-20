@@ -1,47 +1,47 @@
-class GenerateReverseChart {
+class Reverse {
   constructor() {
-    this.timerReverse = new Timer(reverse)
-    this.timerOtherReverse = new Timer(otherReverse)
-    this.data = []
-    this.labels = []
+    this.timerReverse = new Timer(reverse);
+    this.timerOtherReverse = new Timer(myReverse);
+    this.data = [];
+    this.labels = [];
   }
 
   generateLabels = (step, finalSize) => {
-    this.timerReverse.time(step, finalSize)
+    this.timerReverse.time(step, finalSize);
     this.timerReverse.times.forEach((iteration) => {
-      this.labels.push(iteration.size)
-    })
-  }
+      this.labels.push(iteration.size);
+    });
+  };
 
   generateReverseChartData = () => {
-    this.generateLabels(1000, 100000)
-    this.generateReverseData(1000, 100000)
-    this.generateOtherReverseData(1000, 100000)
-    this.renderChart(this.labels, this.generateDataSets(this.data))
-  }
+    this.generateLabels(1000, 100000);
+    this.generateReverseData(1000, 100000);
+    this.generateOtherReverseData(1000, 100000);
+    this.renderChart(this.labels, this.generateDataSets(this.data));
+  };
 
   generateReverseData = (step, finalSize) => {
-    this.timerReverse.time(step, finalSize)
-    let reverseData = []
+    this.timerReverse.time(step, finalSize);
+    let reverseData = [];
     this.timerReverse.times.forEach((iteration) => {
-      reverseData.push(iteration.time)
-    })
-    this.data.push(reverseData)
-  }
+      reverseData.push(iteration.time);
+    });
+    this.data.push(reverseData);
+  };
 
   generateOtherReverseData = (step, finalSize) => {
-    this.timerOtherReverse.time(step, finalSize)
-    let reverseOtherData = []
+    this.timerOtherReverse.time(step, finalSize);
+    let reverseOtherData = [];
     this.timerOtherReverse.times.forEach((iteration) => {
-      reverseOtherData.push(iteration.time)
-    })
-    this.data.push(reverseOtherData)
-  }
+      reverseOtherData.push(iteration.time);
+    });
+    this.data.push(reverseOtherData);
+  };
 
   generateDataSets = (data) => {
-    let names = ["Reverse", "OtherReverse"]
-    let colors = ["#dc3644", "#18a2b8"]
-    let dataArray = []
+    let names = ["Reverse", "Other Reverse"];
+    let colors = ["#dc3644", "#18a2b8"];
+    let dataArray = [];
     names.forEach((label, i) => {
       dataArray.push({
         label: label,
@@ -57,27 +57,25 @@ class GenerateReverseChart {
         pointHoverRadius: 5,
         pointBackgroundColor: colors[i],
         hoverBackgroundColor: colors[i],
-      })
-    })
-    return dataArray
-
-  }
+      });
+    });
+    return dataArray;
+  };
 
   renderChart = (labels, data) => {
-    console.log(data)
     var ctx = document.getElementById("myReverseChart").getContext("2d");
     var myChart = new Chart(ctx, {
       type: "line",
       data: {
         labels: labels,
-        datasets: data
+        datasets: data,
       },
       options: {
         title: {
           display: true,
           text: "Reverse",
           fontSize: 20,
-          fontStyle: 'bold'
+          fontStyle: "bold",
         },
         scales: {
           xAxes: [
@@ -114,13 +112,23 @@ class GenerateReverseChart {
 }
 
 reverse = (input) => {
-  input.reverse()
-}
+  input.reverse();
+};
 
-otherReverse = (input) => {
-  let reverse = []
+myReverse = (input) => {
+  let reverse = [];
   for (let i = input.length; i > 0; i--) {
-    reverse.push(input[i])
+    reverse.push(input[i]);
   }
-  return reverse
-}
+  return reverse;
+};
+
+//  shuffle(array)
+//     new_array = []
+//     until array.empty? do
+//         random_index = rand array.length
+//         new_array << array[random_index]
+//         array.delete_at(random_index)
+//     end
+//     new_array
+// end
