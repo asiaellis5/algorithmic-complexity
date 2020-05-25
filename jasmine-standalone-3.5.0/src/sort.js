@@ -15,10 +15,10 @@ class Sort {
   };
 
   generateSortChartData = () => {
-    this.generateLabels(1000, 100000);
-    this.generateSortData(1000, 100000);
-    this.generateSortOnesAndZerosData(1000, 100000);
-    this.generateOtherSortOnesAndZerosData(1000, 100000);
+    this.generateLabels(10000, 100000);
+    this.generateSortData(10000, 100000);
+    this.generateSortOnesAndZerosData(10000, 100000);
+    this.generateOtherSortOnesAndZerosData(10000, 100000);
     this.renderChart(this.labels, this.generateDataSets(this.data));
   };
 

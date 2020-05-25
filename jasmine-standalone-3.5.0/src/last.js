@@ -1,47 +1,47 @@
 class Last {
   constructor() {
-    this.timerLast = new Timer(last)
-    this.timerOtherLast = new Timer(myLast)
-    this.data = []
-    this.labels = []
+    this.timerLast = new Timer(last);
+    this.timerOtherLast = new Timer(myLast);
+    this.data = [];
+    this.labels = [];
   }
 
   generateLabels = (step, finalSize) => {
-    this.timerLast.time(step, finalSize)
+    this.timerLast.time(step, finalSize);
     this.timerLast.times.forEach((iteration) => {
-      this.labels.push(iteration.size)
-    })
-  }
+      this.labels.push(iteration.size);
+    });
+  };
 
   generateLastChartData = () => {
-    this.generateLabels(1000, 100000)
-    this.generateLastData(1000, 100000)
-    this.generateOtherLastData(1000, 100000)
-    this.renderChart(this.labels, this.generateDataSets(this.data))
-  }
+    this.generateLabels(10000, 100000);
+    this.generateLastData(10000, 100000);
+    this.generateOtherLastData(10000, 100000);
+    this.renderChart(this.labels, this.generateDataSets(this.data));
+  };
 
   generateLastData = (step, finalSize) => {
-    this.timerLast.time(step, finalSize)
-    let lastData = []
+    this.timerLast.time(step, finalSize);
+    let lastData = [];
     this.timerLast.times.forEach((iteration) => {
-      lastData.push(iteration.time)
-    })
-    this.data.push(lastData)
-  }
+      lastData.push(iteration.time);
+    });
+    this.data.push(lastData);
+  };
 
   generateOtherLastData = (step, finalSize) => {
-    this.timerOtherLast.time(step, finalSize)
-    let lastOtherData = []
+    this.timerOtherLast.time(step, finalSize);
+    let lastOtherData = [];
     this.timerOtherLast.times.forEach((iteration) => {
-      lastOtherData.push(iteration.time)
-    })
-    this.data.push(lastOtherData)
-  }
+      lastOtherData.push(iteration.time);
+    });
+    this.data.push(lastOtherData);
+  };
 
   generateDataSets = (data) => {
-    let names = ["Original Last", "Other Last"]
-    let colors = ["#dc3644", "#18a2b8"]
-    let dataArray = []
+    let names = ["Original Last", "Other Last"];
+    let colors = ["#dc3644", "#18a2b8"];
+    let dataArray = [];
     names.forEach((label, i) => {
       dataArray.push({
         label: label,
@@ -57,11 +57,10 @@ class Last {
         pointHoverRadius: 5,
         pointBackgroundColor: colors[i],
         hoverBackgroundColor: colors[i],
-      })
-    })
-    return dataArray
-
-  }
+      });
+    });
+    return dataArray;
+  };
 
   renderChart = (labels, data) => {
     var ctx = document.getElementById("myLastChart").getContext("2d");
@@ -69,14 +68,14 @@ class Last {
       type: "line",
       data: {
         labels: labels,
-        datasets: data
+        datasets: data,
       },
       options: {
         title: {
           display: true,
           text: "Last",
           fontSize: 20,
-          fontStyle: 'bold'
+          fontStyle: "bold",
         },
         scales: {
           xAxes: [
@@ -113,9 +112,9 @@ class Last {
 }
 
 last = (input) => {
-  input.slice(-1)[0]
-}
+  input.slice(-1)[0];
+};
 
 myLast = (input) => {
-  input[input.length - 1]
-}
+  input[input.length - 1];
+};

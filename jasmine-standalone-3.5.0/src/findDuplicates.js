@@ -1,59 +1,62 @@
 class FindDuplicates {
   constructor() {
-    this.timerDuplicate = new Timer(myFindDuplicate)
-    this.timerOtherDuplicate = new Timer(otherFindDuplicate)
-    this.timerNewOtherDuplicate = new Timer(newFindDuplicate)
-    this.data = []
-    this.labels = []
+    this.timerDuplicate = new Timer(myFindDuplicate);
+    this.timerOtherDuplicate = new Timer(otherFindDuplicate);
+    this.timerNewOtherDuplicate = new Timer(newFindDuplicate);
+    this.data = [];
+    this.labels = [];
   }
 
   generateLabels = (step, finalSize) => {
-    this.timerDuplicate.time(step, finalSize)
+    this.timerDuplicate.time(step, finalSize);
     this.timerDuplicate.times.forEach((iteration) => {
-      this.labels.push(iteration.size)
-    })
-
-  }
+      this.labels.push(iteration.size);
+    });
+  };
 
   generateDuplicateChartData = () => {
-    this.generateLabels(1000, 100000)
-    this.generateDuplicateData(1000, 1000)
-    this.generateOtherDuplicateData(1000, 100000)
-    this.generateNewOtherDuplicateData(1000, 100000)
-    this.renderChart(this.labels, this.generateDataSets(this.data))
-  }
+    this.generateLabels(10000, 100000);
+    this.generateDuplicateData(10000, 1000);
+    this.generateOtherDuplicateData(10000, 100000);
+    this.generateNewOtherDuplicateData(10000, 100000);
+    this.renderChart(this.labels, this.generateDataSets(this.data));
+  };
 
   generateDuplicateData = (step, finalSize) => {
-    this.timerDuplicate.time(step, finalSize)
-    let duplicateData = []
+    this.timerDuplicate.time(step, finalSize);
+    let duplicateData = [];
     this.timerDuplicate.times.forEach((iteration) => {
-      duplicateData.push(iteration.time)
-    })
-    this.data.push(duplicateData)
-  }
+      duplicateData.push(iteration.time);
+    });
+    this.data.push(duplicateData);
+  };
 
   generateOtherDuplicateData = (step, finalSize) => {
-    this.timerOtherDuplicate.time(step, finalSize)
-    let duplicateOtherData = []
+    this.timerOtherDuplicate.time(step, finalSize);
+    let duplicateOtherData = [];
     this.timerOtherDuplicate.times.forEach((iteration) => {
-      duplicateOtherData.push(iteration.time)
-    })
-    this.data.push(duplicateOtherData)
-  }
+      duplicateOtherData.push(iteration.time);
+    });
+    this.data.push(duplicateOtherData);
+  };
 
   generateNewOtherDuplicateData = (step, finalSize) => {
-    this.timerNewOtherDuplicate.time(step, finalSize)
-    let duplicateNewOtherData = []
+    this.timerNewOtherDuplicate.time(step, finalSize);
+    let duplicateNewOtherData = [];
     this.timerNewOtherDuplicate.times.forEach((iteration) => {
-      duplicateNewOtherData.push(iteration.time)
-    })
-    this.data.push(duplicateNewOtherData)
-  }
+      duplicateNewOtherData.push(iteration.time);
+    });
+    this.data.push(duplicateNewOtherData);
+  };
 
   generateDataSets = (data) => {
-    let names = ["Find Duplicates", "Other Find Duplicates", "Another Find Duplicates"]
-    let colors = ["#28a745", "#fbbd08", "#000000"]
-    let dataArray = []
+    let names = [
+      "Find Duplicates",
+      "Other Find Duplicates",
+      "Another Find Duplicates",
+    ];
+    let colors = ["#28a745", "#fbbd08", "#000000"];
+    let dataArray = [];
     names.forEach((label, i) => {
       dataArray.push({
         label: label,
@@ -69,11 +72,10 @@ class FindDuplicates {
         pointHoverRadius: 5,
         pointBackgroundColor: colors[i],
         hoverBackgroundColor: colors[i],
-      })
-    })
-    return dataArray
-
-  }
+      });
+    });
+    return dataArray;
+  };
 
   renderChart = (labels, data) => {
     var ctx = document.getElementById("myDuplicateChart").getContext("2d");
@@ -81,14 +83,14 @@ class FindDuplicates {
       type: "line",
       data: {
         labels: labels,
-        datasets: data
+        datasets: data,
       },
       options: {
         title: {
           display: true,
           text: "Find Duplicates",
           fontSize: 20,
-          fontStyle: 'bold'
+          fontStyle: "bold",
         },
         scales: {
           xAxes: [
@@ -125,26 +127,26 @@ class FindDuplicates {
 }
 
 myFindDuplicate = (input) => {
-  let counter = {}
-  let duplicates = []
+  let counter = {};
+  let duplicates = [];
 
   input.forEach((element) => {
     if (counter[element] === undefined) {
-      counter[element] = 1
+      counter[element] = 1;
     } else {
-      counter[element] += 1
+      counter[element] += 1;
       if (counter[element] === 2) {
-        duplicates.push(element)
+        duplicates.push(element);
       }
     }
-  })
-  return duplicates
-}
+  });
+  return duplicates;
+};
 
 otherFindDuplicate = (input) => {
-  let uniq = [...new Set(input)]
-  return uniq
-}
+  let uniq = [...new Set(input)];
+  return uniq;
+};
 
 newFindDuplicate = (arr) => {
   var hashTable = [];
@@ -153,10 +155,10 @@ newFindDuplicate = (arr) => {
   for (var i = 0; i < arr.length; i++) {
     if (hashTable[arr[i].toString()] === undefined) {
       hashTable[arr[i].toString()] = true;
+    } else {
+      dups.push(arr[i]);
     }
-    else { dups.push(arr[i]); }
-
   }
 
   return dups;
-}
+};

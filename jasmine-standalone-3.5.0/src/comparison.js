@@ -1,70 +1,69 @@
 class Comparison {
   constructor() {
-    this.timerSort = new Timer(sort)
-    this.timerReverse = new Timer(reverse)
-    this.timerLast = new Timer(last)
-    this.timerShuffle = new Timer(shuffle)
-    this.data = []
-    this.labels = []
+    this.timerSort = new Timer(sort);
+    this.timerReverse = new Timer(reverse);
+    this.timerLast = new Timer(last);
+    this.timerShuffle = new Timer(shuffle);
+    this.data = [];
+    this.labels = [];
   }
 
   generateLabels = (step, finalSize) => {
-    this.timerSort.time(step, finalSize)
+    this.timerSort.time(step, finalSize);
     this.timerSort.times.forEach((iteration) => {
-      this.labels.push(iteration.size)
-    })
-
-  }
+      this.labels.push(iteration.size);
+    });
+  };
 
   generateChartData = () => {
-    this.generateLabels(1000, 100000)
-    this.generateSortData(1000, 100000)
-    this.generateReverseData(1000, 100000)
-    this.generateLastData(1000, 100000)
-    this.generateShuffleData(1000, 100000)
-    this.renderChart(this.labels, this.generateDataSets(this.data))
-  }
+    this.generateLabels(10000, 100000);
+    this.generateSortData(10000, 100000);
+    this.generateReverseData(10000, 100000);
+    this.generateLastData(10000, 100000);
+    this.generateShuffleData(10000, 100000);
+    this.renderChart(this.labels, this.generateDataSets(this.data));
+  };
 
   generateSortData = (step, finalSize) => {
-    this.timerSort.time(step, finalSize)
-    let sortData = []
+    this.timerSort.time(step, finalSize);
+    let sortData = [];
     this.timerSort.times.forEach((iteration) => {
-      sortData.push(iteration.time)
-    })
-    this.data.push(sortData)
-  }
+      sortData.push(iteration.time);
+    });
+    this.data.push(sortData);
+  };
 
   generateReverseData = (step, finalSize) => {
-    this.timerReverse.time(step, finalSize)
-    let reverseData = []
+    this.timerReverse.time(step, finalSize);
+    let reverseData = [];
     this.timerReverse.times.forEach((iteration) => {
-      reverseData.push(iteration.time)
-    })
-    this.data.push(reverseData)
-  }
+      reverseData.push(iteration.time);
+    });
+    this.data.push(reverseData);
+  };
 
   generateLastData = (step, finalSize) => {
-    this.timerLast.time(step, finalSize)
-    let lastData = []
+    this.timerLast.time(step, finalSize);
+    let lastData = [];
     this.timerLast.times.forEach((iteration) => {
-      lastData.push(iteration.time)
-    })
-    this.data.push(lastData)
-  }
+      lastData.push(iteration.time);
+    });
+    this.data.push(lastData);
+  };
 
   generateShuffleData = (step, finalSize) => {
-    this.timerShuffle.time(step, finalSize)
-    let shuffleData = []
+    this.timerShuffle.time(step, finalSize);
+    let shuffleData = [];
     this.timerShuffle.times.forEach((iteration) => {
-      shuffleData.push(iteration.time)
-    })
-    this.data.push(shuffleData)
-  }
+      shuffleData.push(iteration.time);
+    });
+    this.data.push(shuffleData);
+  };
 
   generateDataSets = (data) => {
-    let names = ["Sort", "Reverse", "Last", "Shuffle"]
-    let colors = ["#28a745", "#fbbd08", "#dc3644", "#18a2b8"]
-    let dataArray = []
+    let names = ["Sort", "Reverse", "Last", "Shuffle"];
+    let colors = ["#28a745", "#fbbd08", "#dc3644", "#18a2b8"];
+    let dataArray = [];
     names.forEach((label, i) => {
       dataArray.push({
         label: label,
@@ -80,13 +79,10 @@ class Comparison {
         pointHoverRadius: 5,
         pointBackgroundColor: colors[i],
         hoverBackgroundColor: colors[i],
-      })
-    })
-    return dataArray
-
-  }
-
-
+      });
+    });
+    return dataArray;
+  };
 
   renderChart = (labels, data) => {
     var ctx = document.getElementById("myChart").getContext("2d");
@@ -94,14 +90,14 @@ class Comparison {
       type: "line",
       data: {
         labels: labels,
-        datasets: data
+        datasets: data,
       },
       options: {
         title: {
           display: true,
           text: "Algorthim Complexity",
           fontSize: 20,
-          fontStyle: 'bold'
+          fontStyle: "bold",
         },
         scales: {
           xAxes: [
@@ -135,30 +131,30 @@ class Comparison {
       },
     });
   };
-
-
 }
 
 reverse = (input) => {
-  input.reverse()
-}
+  input.reverse();
+};
 
 sort = (input) => {
-  input.sort()
-}
+  input.sort();
+};
 
 last = (input) => {
-  input.slice(-1)[0]
-}
+  input.slice(-1)[0];
+};
 
 shuffle = (input) => {
   for (let i = input.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
-    console.log("math floor", Math.random())
-    [input[i], input[j]] = [input[j], input[i]];
+    console.log("math floor", Math.random())[(input[i], input[j])] = [
+      input[j],
+      input[i],
+    ];
   }
-}
+};
 
 push = (input) => {
-  input.push(1)
-}
+  input.push(1);
+};

@@ -1,48 +1,47 @@
 class Shuffle {
   constructor() {
-    this.timerShuffle = new Timer(shuffle)
-    this.timerOtherShuffle = new Timer(myShuffle)
-    this.data = []
-    this.labels = []
+    this.timerShuffle = new Timer(shuffle);
+    this.timerOtherShuffle = new Timer(myShuffle);
+    this.data = [];
+    this.labels = [];
   }
 
   generateLabels = (step, finalSize) => {
-    this.timerShuffle.time(step, finalSize)
+    this.timerShuffle.time(step, finalSize);
     this.timerShuffle.times.forEach((iteration) => {
-      this.labels.push(iteration.size)
-    })
-
-  }
+      this.labels.push(iteration.size);
+    });
+  };
 
   generateShuffleChartData = () => {
-    this.generateLabels(1000, 100000)
-    this.generateShuffleData(1000, 1000)
-    this.generateOtherShuffleData(1000, 100000)
-    this.renderChart(this.labels, this.generateDataSets(this.data))
-  }
+    this.generateLabels(10000, 100000);
+    this.generateShuffleData(10000, 1000);
+    this.generateOtherShuffleData(10000, 100000);
+    this.renderChart(this.labels, this.generateDataSets(this.data));
+  };
 
   generateShuffleData = (step, finalSize) => {
-    this.timerShuffle.time(step, finalSize)
-    let shuffleData = []
+    this.timerShuffle.time(step, finalSize);
+    let shuffleData = [];
     this.timerShuffle.times.forEach((iteration) => {
-      shuffleData.push(iteration.time)
-    })
-    this.data.push(shuffleData)
-  }
+      shuffleData.push(iteration.time);
+    });
+    this.data.push(shuffleData);
+  };
 
   generateOtherShuffleData = (step, finalSize) => {
-    this.timerOtherShuffle.time(step, finalSize)
-    let shuffleOtherData = []
+    this.timerOtherShuffle.time(step, finalSize);
+    let shuffleOtherData = [];
     this.timerOtherShuffle.times.forEach((iteration) => {
-      shuffleOtherData.push(iteration.time)
-    })
-    this.data.push(shuffleOtherData)
-  }
+      shuffleOtherData.push(iteration.time);
+    });
+    this.data.push(shuffleOtherData);
+  };
 
   generateDataSets = (data) => {
-    let names = ["Shuffle", "Other Shuffle"]
-    let colors = ["#28a745", "#fbbd08"]
-    let dataArray = []
+    let names = ["Shuffle", "Other Shuffle"];
+    let colors = ["#28a745", "#fbbd08"];
+    let dataArray = [];
     names.forEach((label, i) => {
       dataArray.push({
         label: label,
@@ -58,11 +57,10 @@ class Shuffle {
         pointHoverRadius: 5,
         pointBackgroundColor: colors[i],
         hoverBackgroundColor: colors[i],
-      })
-    })
-    return dataArray
-
-  }
+      });
+    });
+    return dataArray;
+  };
 
   renderChart = (labels, data) => {
     var ctx = document.getElementById("myShuffleChart").getContext("2d");
@@ -70,14 +68,14 @@ class Shuffle {
       type: "line",
       data: {
         labels: labels,
-        datasets: data
+        datasets: data,
       },
       options: {
         title: {
           display: true,
           text: "Shuffle",
           fontSize: 20,
-          fontStyle: 'bold'
+          fontStyle: "bold",
         },
         scales: {
           xAxes: [
@@ -118,8 +116,8 @@ shuffle = (input) => {
     let j = Math.floor(Math.random() * (i + 1));
     [input[i], input[j]] = [input[j], input[i]];
   }
-}
+};
 
 myShuffle = (input) => {
   input.sort(() => Math.random() - 0.5);
-}
+};

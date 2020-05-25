@@ -14,9 +14,9 @@ class Reverse {
   };
 
   generateReverseChartData = () => {
-    this.generateLabels(1000, 100000);
-    this.generateReverseData(1000, 100000);
-    this.generateOtherReverseData(1000, 100000);
+    this.generateLabels(10000, 100000);
+    this.generateReverseData(10000, 100000);
+    this.generateOtherReverseData(10000, 100000);
     this.renderChart(this.labels, this.generateDataSets(this.data));
   };
 

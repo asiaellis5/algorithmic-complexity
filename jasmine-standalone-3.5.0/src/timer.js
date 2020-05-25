@@ -28,7 +28,7 @@ class Timer {
     }
   };
 
-  timeWordArray = (step, finalSize) => {
+  timeWords = (step, finalSize) => {
     for (let i = 0; i < finalSize; i += step) {
       var array = this.makeArrayWords(i);
       let shuffled = this.shuffle(array);
@@ -98,7 +98,7 @@ class Timer {
       "four",
       "four",
     ];
-    let wordArray = Array(i).fill(words);
-    console.log(wordArray.flat());
+    let wordArray = Array(i).fill(words).flat();
+    return wordArray;
   };
 }
