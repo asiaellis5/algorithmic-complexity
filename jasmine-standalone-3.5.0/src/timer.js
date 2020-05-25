@@ -28,6 +28,18 @@ class Timer {
     }
   };
 
+  timeWordArray = (step, finalSize) => {
+    for (let i = 0; i < finalSize; i += step) {
+      var array = this.makeArrayWords(i);
+      let shuffled = this.shuffle(array);
+      let start = performance.now();
+      this.function(shuffled);
+      let end = performance.now();
+      let time = end - start;
+      this.addTimes(this.times, i, time);
+    }
+  };
+
   addTimes = (array, size, time) => {
     array.push({ size: size, time: time });
   };
@@ -71,5 +83,22 @@ class Timer {
     });
     let finalArray = ones.concat(zeros);
     return finalArray;
+  };
+
+  makeArrayWords = (i) => {
+    let words = [
+      "one",
+      "two",
+      "two",
+      "three",
+      "three",
+      "three",
+      "four",
+      "four",
+      "four",
+      "four",
+    ];
+    let wordArray = Array(i).fill(words);
+    console.log(wordArray.flat());
   };
 }
