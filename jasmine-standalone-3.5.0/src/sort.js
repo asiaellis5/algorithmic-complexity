@@ -1,8 +1,8 @@
 class Sort {
   constructor() {
     this.timerSort = new Timer(sort);
-    this.timerSortOnesAndZeros = new Timer(sortOnesAndZeros);
-    this.timerSortOtherOnesAndZeros = new Timer(differentSortOnesAndZeros);
+    this.timerOtherSort = new Timer(quickSort);
+    this.timerSelectionSort = new Timer(selectionSort);
     this.data = [];
     this.labels = [];
   }
@@ -15,10 +15,10 @@ class Sort {
   };
 
   generateSortChartData = () => {
-    this.generateLabels(10000, 100000);
-    this.generateSortData(10000, 100000);
-    this.generateSortOnesAndZerosData(10000, 100000);
-    this.generateOtherSortOnesAndZerosData(10000, 100000);
+    this.generateLabels(100, 10000);
+    this.generateSortData(100, 10000);
+    this.generateOtherSortData(100, 10000);
+    this.generateSelectionSortData(100, 10000);
     this.renderChart(this.labels, this.generateDataSets(this.data));
   };
 
@@ -31,27 +31,27 @@ class Sort {
     this.data.push(sortData);
   };
 
-  generateSortOnesAndZerosData = (step, finalSize) => {
-    this.timerSortOnesAndZeros.timeOnesAndZeros(step, finalSize);
-    let sortOnesAndZerosData = [];
-    this.timerSortOnesAndZeros.times.forEach((iteration) => {
-      sortOnesAndZerosData.push(iteration.time);
+  generateOtherSortData = (step, finalSize) => {
+    this.timerOtherSort.time(step, finalSize);
+    let otherSortData = [];
+    this.timerOtherSort.times.forEach((iteration) => {
+      otherSortData.push(iteration.time);
     });
-    this.data.push(sortOnesAndZerosData);
+    this.data.push(otherSortData);
   };
 
-  generateOtherSortOnesAndZerosData = (step, finalSize) => {
-    this.timerSortOtherOnesAndZeros.timeOnesAndZeros(step, finalSize);
-    let sortOtherOnesAndZerosData = [];
-    this.timerSortOtherOnesAndZeros.times.forEach((iteration) => {
-      sortOtherOnesAndZerosData.push(iteration.time);
+  generateSelectionSortData = (step, finalSize) => {
+    this.timerSelectionSort.time(step, finalSize);
+    let selectionSortData = [];
+    this.timerSelectionSort.times.forEach((iteration) => {
+      selectionSortData.push(iteration.time);
     });
-    this.data.push(sortOtherOnesAndZerosData);
+    this.data.push(selectionSortData);
   };
 
   generateDataSets = (data) => {
-    let names = ["Sort", "Sort Ones and Zeros", "Other Sort Ones and Zeros"];
-    let colors = ["#dc3644", "#18a2b8", "#fbbd08"];
+    let names = ["Sort", "Quick Sort", "Selection Sort"];
+    let colors = ["#dc3644", "#ffc0cb", "#40e0d0"];
     let dataArray = [];
     names.forEach((label, i) => {
       dataArray.push({
@@ -123,42 +123,36 @@ class Sort {
 }
 
 sort = (input) => {
-  input.sort();
+  input.sort((a, b) => a - b);
 };
 
-mySort = (input) => {
-  for (var i = 0; i < input.length; i++) {
-    for (var j = i + 1; j < input.length; j++) {
-      if (input[i] > input[j]) {
-        var swap = input[i];
-        input[i] = input[j];
-        input[j] = swap;
+quickSort = (array) => {
+  if (array.length <= 1) {
+    return array;
+  }
+  let pivot = array[0];
+  let low = [];
+  let high = [];
+  for (let i = 1; i < array.length; i++) {
+    array[i] < pivot ? low.push(array[i]) : high.push(array[i]);
+  }
+  return quickSort(low).concat(pivot, quickSort(high));
+};
+
+selectionSort = (arr) => {
+  let len = arr.length;
+  for (let i = 0; i < len; i++) {
+    let min = i;
+    for (let j = i + 1; j < len; j++) {
+      if (arr[min] > arr[j]) {
+        min = j;
       }
     }
+    if (min !== i) {
+      let tmp = arr[i];
+      arr[i] = arr[min];
+      arr[min] = tmp;
+    }
   }
-  return input;
-};
-
-sortOnesAndZeros = (input) => {
-  var sorted = [];
-  input.forEach((element) => {
-    if (element === 1) {
-      sorted.unshift(element);
-    } else {
-      sorted.push(element);
-    }
-  });
-};
-
-differentSortOnesAndZeros = (input) => {
-  var ones = [];
-  var zeros = [];
-  input.forEach((element) => {
-    if (element === 1) {
-      ones.push(element);
-    } else {
-      zeros.push(element);
-    }
-  });
-  sorted = ones.concat(zeros);
+  return arr;
 };

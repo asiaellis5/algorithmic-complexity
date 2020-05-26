@@ -1,45 +1,45 @@
-class Reverse {
+class SortZerosAndOnes {
   constructor() {
-    this.timerReverse = new Timer(reverse);
-    this.timerOtherReverse = new Timer(myReverse);
+    this.timerSortOnesAndZeros = new Timer(sortOnesAndZeros);
+    this.timerSortOtherOnesAndZeros = new Timer(differentSortOnesAndZeros);
     this.data = [];
     this.labels = [];
   }
 
   generateLabels = (step, finalSize) => {
-    this.timerReverse.time(step, finalSize);
-    this.timerReverse.times.forEach((iteration) => {
+    this.timerSortOnesAndZeros.time(step, finalSize);
+    this.timerSortOnesAndZeros.times.forEach((iteration) => {
       this.labels.push(iteration.size);
     });
   };
 
-  generateReverseChartData = () => {
+  generateSortOnesAndZerosChartData = () => {
     this.generateLabels(10000, 100000);
-    this.generateReverseData(10000, 100000);
-    this.generateOtherReverseData(10000, 100000);
+    this.generateSortOnesAndZerosData(10000, 100000);
+    this.generateOtherSortOnesAndZerosData(10000, 100000);
     this.renderChart(this.labels, this.generateDataSets(this.data));
   };
 
-  generateReverseData = (step, finalSize) => {
-    this.timerReverse.time(step, finalSize);
-    let reverseData = [];
-    this.timerReverse.times.forEach((iteration) => {
-      reverseData.push(iteration.time);
+  generateSortOnesAndZerosData = (step, finalSize) => {
+    this.timerSortOnesAndZeros.timeOnesAndZeros(step, finalSize);
+    let sortOnesAndZerosData = [];
+    this.timerSortOnesAndZeros.times.forEach((iteration) => {
+      sortOnesAndZerosData.push(iteration.time);
     });
-    this.data.push(reverseData);
+    this.data.push(sortOnesAndZerosData);
   };
 
-  generateOtherReverseData = (step, finalSize) => {
-    this.timerOtherReverse.time(step, finalSize);
-    let reverseOtherData = [];
-    this.timerOtherReverse.times.forEach((iteration) => {
-      reverseOtherData.push(iteration.time);
+  generateOtherSortOnesAndZerosData = (step, finalSize) => {
+    this.timerSortOtherOnesAndZeros.timeOnesAndZeros(step, finalSize);
+    let sortOtherOnesAndZerosData = [];
+    this.timerSortOtherOnesAndZeros.times.forEach((iteration) => {
+      sortOtherOnesAndZerosData.push(iteration.time);
     });
-    this.data.push(reverseOtherData);
+    this.data.push(sortOtherOnesAndZerosData);
   };
 
   generateDataSets = (data) => {
-    let names = ["Reverse", "Other Reverse"];
+    let names = ["Sort Ones and Zeros", "Other Sort Ones and Zeros"];
     let colors = ["#dc3644", "#18a2b8"];
     let dataArray = [];
     names.forEach((label, i) => {
@@ -63,7 +63,9 @@ class Reverse {
   };
 
   renderChart = (labels, data) => {
-    var ctx = document.getElementById("myReverseChart").getContext("2d");
+    var ctx = document
+      .getElementById("mySortOnesAndZerosChart")
+      .getContext("2d");
     var myChart = new Chart(ctx, {
       type: "line",
       data: {
@@ -73,7 +75,7 @@ class Reverse {
       options: {
         title: {
           display: true,
-          text: "Reverse",
+          text: "Sort Ones and Zeros",
           fontSize: 20,
           fontStyle: "bold",
         },
@@ -111,14 +113,26 @@ class Reverse {
   };
 }
 
-reverse = (input) => {
-  input.reverse();
+sortOnesAndZeros = (input) => {
+  var sorted = [];
+  input.forEach((element) => {
+    if (element === 1) {
+      sorted.unshift(element);
+    } else {
+      sorted.push(element);
+    }
+  });
 };
 
-myReverse = (input) => {
-  let reverse = [];
-  for (let i = input.length; i > 0; i--) {
-    reverse.push(input[i]);
-  }
-  return reverse;
+differentSortOnesAndZeros = (input) => {
+  var ones = [];
+  var zeros = [];
+  input.forEach((element) => {
+    if (element === 1) {
+      ones.push(element);
+    } else {
+      zeros.push(element);
+    }
+  });
+  sorted = ones.concat(zeros);
 };

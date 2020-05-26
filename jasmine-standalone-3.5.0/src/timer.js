@@ -59,7 +59,9 @@ class Timer {
     if (
       this.function === sort ||
       this.function === sortOnesAndZeros ||
-      this.function === differentSortOnesAndZeros
+      this.function === differentSortOnesAndZeros ||
+      this.function === quickSort ||
+      this.function == selectionSort
     ) {
       for (let i = input.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
