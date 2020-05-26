@@ -3,6 +3,7 @@ class Sort {
     this.timerSort = new Timer(sort);
     this.timerOtherSort = new Timer(quickSort);
     this.timerSelectionSort = new Timer(selectionSort);
+    this.timerInsertionSort = new Timer(selectionSort);
     this.data = [];
     this.labels = [];
   }
@@ -19,6 +20,7 @@ class Sort {
     this.generateSortData(100, 10000);
     this.generateOtherSortData(100, 10000);
     this.generateSelectionSortData(100, 10000);
+    this.generateInsertionSortData(100, 10000);
     this.renderChart(this.labels, this.generateDataSets(this.data));
   };
 
@@ -49,9 +51,18 @@ class Sort {
     this.data.push(selectionSortData);
   };
 
+  generateInsertionSortData = (step, finalSize) => {
+    this.timerInsertionSort.time(step, finalSize);
+    let insertionSortData = [];
+    this.timerInsertionSort.times.forEach((iteration) => {
+      insertionSortData.push(iteration.time);
+    });
+    this.data.push(insertionSortData);
+  };
+
   generateDataSets = (data) => {
-    let names = ["Sort", "Quick Sort", "Selection Sort"];
-    let colors = ["#dc3644", "#ffc0cb", "#40e0d0"];
+    let names = ["Sort", "Quick Sort", "Selection Sort", "Insertion Sort"];
+    let colors = ["#dc3644", "#ffc0cb", "#40e0d0", "#32cd32"];
     let dataArray = [];
     names.forEach((label, i) => {
       dataArray.push({
@@ -155,4 +166,18 @@ selectionSort = (arr) => {
     }
   }
   return arr;
+};
+
+insertionSort = (inputArr) => {
+  let length = inputArr.length;
+  for (let i = 1; i < length; i++) {
+    let key = inputArr[i];
+    let j = i - 1;
+    while (j >= 0 && inputArr[j] > key) {
+      inputArr[j + 1] = inputArr[j];
+      j = j - 1;
+    }
+    inputArr[j + 1] = key;
+  }
+  return inputArr;
 };
