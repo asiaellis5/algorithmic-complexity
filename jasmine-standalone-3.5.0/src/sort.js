@@ -3,7 +3,8 @@ class Sort {
     this.timerSort = new Timer(sort);
     this.timerOtherSort = new Timer(quickSort);
     this.timerSelectionSort = new Timer(selectionSort);
-    this.timerInsertionSort = new Timer(selectionSort);
+    this.timerInsertionSort = new Timer(insertionSort);
+    this.timerMergeSort = new Timer(mergeSort);
     this.data = [];
     this.labels = [];
   }
@@ -16,11 +17,12 @@ class Sort {
   };
 
   generateSortChartData = () => {
-    this.generateLabels(100, 10000);
-    this.generateSortData(100, 10000);
-    this.generateOtherSortData(100, 10000);
-    this.generateSelectionSortData(100, 10000);
-    this.generateInsertionSortData(100, 10000);
+    this.generateLabels(1000, 10000);
+    this.generateSortData(1000, 10000);
+    this.generateOtherSortData(1000, 10000);
+    this.generateSelectionSortData(1000, 10000);
+    this.generateInsertionSortData(1000, 10000);
+    this.generateMergeSortData(1000, 10000);
     this.renderChart(this.labels, this.generateDataSets(this.data));
   };
 
@@ -60,9 +62,24 @@ class Sort {
     this.data.push(insertionSortData);
   };
 
+  generateMergeSortData = (step, finalSize) => {
+    this.timerMergeSort.time(step, finalSize);
+    let mergeSortData = [];
+    this.timerMergeSort.times.forEach((iteration) => {
+      mergeSortData.push(iteration.time);
+    });
+    this.data.push(mergeSortData);
+  };
+
   generateDataSets = (data) => {
-    let names = ["Sort", "Quick Sort", "Selection Sort", "Insertion Sort"];
-    let colors = ["#dc3644", "#ffc0cb", "#40e0d0", "#32cd32"];
+    let names = [
+      "Sort",
+      "Quick Sort",
+      "Selection Sort",
+      "Insertion Sort",
+      "Merge Sort",
+    ];
+    let colors = ["#dc3644", "#ffc0cb", "#40e0d0", "#32cd32", "#ffff00"];
     let dataArray = [];
     names.forEach((label, i) => {
       dataArray.push({
@@ -180,4 +197,23 @@ insertionSort = (inputArr) => {
     inputArr[j + 1] = key;
   }
   return inputArr;
+};
+
+mergeSort = (array) => {
+  if (array.length < 2) return array;
+  let mid = Math.floor(array.length / 2);
+  let sortedLeftArray = mergeSort(array.slice(0, mid));
+  let sortedRightArray = mergeSort(array.slice(mid, array.length));
+  return merge(sortedLeftArray, sortedRightArray);
+  function merge(left, right) {
+    let result = [];
+    while (left.length && right.length) {
+      if (left[0] < right[0]) {
+        result.push(left.shift());
+      } else {
+        result.push(right.shift());
+      }
+    }
+    return [...result, ...left, ...right];
+  }
 };
