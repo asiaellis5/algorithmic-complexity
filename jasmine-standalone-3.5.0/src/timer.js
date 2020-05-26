@@ -2,6 +2,7 @@ class Timer {
   constructor(callback) {
     this.times = [];
     this.function = callback;
+    this.fibTimes = [];
   }
 
   time = (step, finalSize) => {
@@ -34,6 +35,16 @@ class Timer {
       let shuffled = this.shuffle(array);
       let start = performance.now();
       this.function(shuffled);
+      let end = performance.now();
+      let time = end - start;
+      this.addTimes(this.times, i, time);
+    }
+  };
+
+  timeFibonnacci = (step, finalSize) => {
+    for (let i = 0; i < finalSize; i += step) {
+      let start = performance.now();
+      this.function(i);
       let end = performance.now();
       let time = end - start;
       this.addTimes(this.times, i, time);

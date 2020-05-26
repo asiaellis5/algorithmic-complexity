@@ -2,6 +2,7 @@ class MostFrequent {
   constructor() {
     this.mostFrequent = new Timer(mostFrequent);
     this.otherMostFrequent = new Timer(otherMostFrequent);
+    this.anotherMostFrequent = new Timer(anotherMostFrequent);
     this.data = [];
     this.labels = [];
   }
@@ -17,6 +18,7 @@ class MostFrequent {
     this.generateLabels(10000, 100000);
     this.generateMostFrequentData(10000, 100000);
     this.generateOtherMostFrequentData(10000, 100000);
+    this.generateAnotherMostFrequentData(10000, 100000);
     this.renderChart(this.labels, this.generateDataSets(this.data));
   };
 
@@ -38,9 +40,22 @@ class MostFrequent {
     this.data.push(otherMostFrequentData);
   };
 
+  generateAnotherMostFrequentData = (step, finalSize) => {
+    this.anotherMostFrequent.timeWords(step, finalSize);
+    let anotherMostFrequentData = [];
+    this.anotherMostFrequent.times.forEach((iteration) => {
+      anotherMostFrequentData.push(iteration.time);
+    });
+    this.data.push(anotherMostFrequentData);
+  };
+
   generateDataSets = (data) => {
-    let names = ["Most Frequent", "Other Most Frequent"];
-    let colors = ["#dc3644", "#18a2b8"];
+    let names = [
+      "Most Frequent",
+      "Other Most Frequent",
+      "Another Most Frequent",
+    ];
+    let colors = ["#dc3644", "#18a2b8", "#000000"];
     let dataArray = [];
     names.forEach((label, i) => {
       dataArray.push({
@@ -73,7 +88,7 @@ class MostFrequent {
       options: {
         title: {
           display: true,
-          text: "Sort",
+          text: "Most Frequent",
           fontSize: 20,
           fontStyle: "bold",
         },
@@ -135,4 +150,37 @@ otherMostFrequent = (array) => {
     }
     return duplicates;
   }
+};
+
+anotherMostFrequent = (array) => {
+  words = {};
+  mostFreq = 0;
+  which = [];
+  other = [];
+
+  array.forEach((word) => {
+    if (words[word] === undefined) {
+      words[word] = 1;
+    } else {
+      words[word] += 1;
+    }
+
+    if (words[word] > mostFreq) {
+      mostFreq = words[word];
+      which = [word];
+    } else if (words[word] === mostFreq) {
+      which.push(word);
+      delete words[which[0]];
+    }
+
+    if (words[word] > mostFreq) {
+      mostFreq = words[word];
+      which = [word];
+    } else if (words[word] === mostFreq) {
+      which.push(word);
+    }
+  });
+
+  newArray = [...new Set(which)];
+  return newArray;
 };
