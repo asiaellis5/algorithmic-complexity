@@ -12,7 +12,11 @@ Clone this repo and navigate into the Jasmine Library. Find the `index.html`, ri
 
 Navigate into the Jasmine Library. Find the `SpecRunner.html`, right click and `copy path` and open in the browser of your choice.
 
-## Graphs
+## Comparison Graph For Built in Functions
+
+<img src='./public/images/comparison.png' />
+
+## Graphs For Own Algorithms
 
 <table>
 
