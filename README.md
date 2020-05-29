@@ -11,3 +11,50 @@ Clone this repo and navigate into the Jasmine Library. Find the `index.html`, ri
 ### How to run tests
 
 Navigate into the Jasmine Library. Find the `SpecRunner.html`, right click and `copy path` and open in the browser of your choice.
+
+## Graphs
+
+<table>
+
+  <tr>
+     <td>Shuffle()</td>
+      <td>Reverse()</td>
+  </tr>
+  <tr>
+    <td valign="top"><img src='./public/images/shuffle.png' width="5000"/></td>
+    <td valign="top"><img src='./public/images/reverse.png' width="5000"/></td>
+  </tr>
+ </table>
+
+ <table>
+  <tr>
+     <td>Find Duplicates()</td>
+      <td>Last()</td>
+  </tr>
+  <tr>
+    <td valign="top"><img src='./public/images/find_duplicates.png' width="5000"/></td>
+    <td valign="top"><img src='./public/images/last.png' width="5000"/></td>
+  </tr>
+ </table>
+
+ <table>
+  <tr>
+     <td>Sort Zeros and Ones()</td>
+      <td>Sort()</td>
+  </tr>
+  <tr>
+    <td valign="top"><img src='./public/images/sort_zeros_and_ones.png' width="5000"/></td>
+    <td valign="top"><img src='./public/images/sort.png' width="5000"/></td>
+  </tr>
+ </table>
+
+ <table>
+  <tr>
+     <td>Most Frequent()</td>
+      <td>Fibonacci()</td>
+  </tr>
+  <tr>
+    <td valign="top"><img src='./public/images/most_frequent.png' width="5000"/></td>
+    <td valign="top"><img src='./public/images/fibonacci.png' width="5000"/></td>
+  </tr>
+ </table>
