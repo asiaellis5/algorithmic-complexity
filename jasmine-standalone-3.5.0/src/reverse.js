@@ -40,7 +40,7 @@ class Reverse {
 
   generateDataSets = (data) => {
     let names = ["Reverse", "Other Reverse"];
-    let colors = ["#dc3644", "#18a2b8"];
+    let colors = ["#ffc0cb", "#18a2b8"];
     let dataArray = [];
     names.forEach((label, i) => {
       dataArray.push({
