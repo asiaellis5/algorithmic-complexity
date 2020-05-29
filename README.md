@@ -1,6 +1,6 @@
 # Algorithmic-Complexity
 
-Timing different algorithms, seeing how they interact with memory and using it to make them faster. Timing function written in JavaScript to time how effiecient different algorithms are, including those built in to JavaScript and ones I have written myself using different techniques and data structures.
+Timing different algorithms, seeing how they interact with memory and using it to make them faster. Timing function written in JavaScript to time how efficient different algorithms are, including those built in to JavaScript and ones I have written myself using different techniques and data structures.
 
 The graphs demonstrating the algorithms complexity are created using Chart.js and demonstrate how the algorithms perform when given different input sizes.
 
